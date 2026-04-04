@@ -10,7 +10,7 @@ function Footer() {
       </p>
 
       <p className="text-sm md:text-base">
-        Copyright © 2026 SB
+        Copyright © 2026 Shivam. All rights reserved.
       </p>
 
       <div className="flex gap-6 text-2xl md:text-3xl">

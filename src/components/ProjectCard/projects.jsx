@@ -1,11 +1,17 @@
 import { FaGithub } from "react-icons/fa";
 import { HiOutlineExternalLink } from "react-icons/hi";
 import { NavLink } from "react-router";
+import gsap from 'gsap';
+import { useGSAP } from "@gsap/react";
 
 function ProjectCard({ img, title, description, github, demo }) {
+
+  
+    
+
   return (
     <div
-      className="bg-[#0f0820] border border-purple-600 rounded-xl 
+      className="animateProject bg-[#0f0820] border border-purple-600 rounded-xl 
     shadow-[0_0_15px_rgba(168,85,247,0.6)] p-6 text-center 
     hover:scale-105 transition duration-300"
     >

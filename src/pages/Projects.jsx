@@ -4,7 +4,12 @@ import ProjectCard from "../components/ProjectCard/projects";
 import pyroDekho from "../assets/pyroDekho.png";
 import snake from "../assets/Snake.jpg";
 import Footer from "../components/Footer/footer";
+import gsap from 'gsap';
+import { useGSAP } from "@gsap/react";
 function Projects() {
+
+
+
   const projects = [
     {
       img: pyroDekho,

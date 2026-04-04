@@ -3,7 +3,8 @@ import Navbar from '../components/Home/Navbar'
 import Main from '../components/Home/Main'
 
 
-function Home() {
+function Home(props) {
+  console.log(props)
   return (
     <div>
       <Navbar />

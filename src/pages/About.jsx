@@ -21,6 +21,8 @@ import {
 import { TbBrandRedux } from "react-icons/tb";
 import SkillCard from "../components/About/SkillCard";
 import Footer from "../components/Footer/footer";
+import gsap from 'gsap'
+import { useGSAP } from "@gsap/react";
 
 function About() {
   const skills = [
@@ -38,6 +40,52 @@ function About() {
     { name: "Postman", icon: <SiPostman className="text-orange-500" /> },
   ];
 
+  //Animation Code
+
+  useGSAP(()=>{
+    const tl = gsap.timeline();
+    tl.from('.headingAnimate',{
+      x:200,
+      opacity:0,
+      duration:1,
+
+    })
+
+    tl.from('.TextLeftAnimate',{
+      x:-100,
+      opacity:0,
+      duration:1,
+    })
+    tl.from('.TextRightAnimate',{
+      x:100,
+      opacity:0,
+      duration:1,
+    })
+
+    tl.from(".animateImage", {
+      x: 100,
+      scale: 0,
+      opacity: 0,
+      duration: 0.8,
+      ease: "back.out(1.7)"
+    });
+
+    gsap.from('.animateSkill',{
+      x:-200,
+      duration:1,
+      opacity:0,
+      scrollTrigger:{
+        trigger:'.animateSkill',
+        start: "top 85%",
+        end: "bottom 80%",
+        scrub: 0.6,
+        // markers:true
+
+      }
+    })
+
+  })
+
   return (
     <div className="bg-[#181126] min-h-screen text-white">
       <Navbar />
@@ -48,43 +96,43 @@ function About() {
         {/* LEFT TEXT */}
         <div className="w-full lg:w-3/4 px-6 md:px-10 font-code flex flex-col gap-6 text-lg md:text-xl leading-8">
 
-          <h1 className="text-2xl md:text-3xl lg:text-4xl text-center">
+          <h1 className="headingAnimate text-2xl md:text-3xl lg:text-4xl text-center">
             Know Who <span className="text-[#C770F0]">I'M</span>
           </h1>
 
-          <p>
+          <p className="TextLeftAnimate">
             Hi everyone! I’m Shivam from India. I’m a passionate Web Developer
             who enjoys building modern and responsive web applications. I focus
             on creating clean UI and scalable full-stack applications using
             modern technologies.
           </p>
 
-          <p>
+          <p className="TextRightAnimate">
             I mainly work with technologies like React.js, Node.js, Express.js,
             MongoDB, JavaScript, and Tailwind CSS. I enjoy building projects,
             exploring new tools, and continuously improving my development
             skills.
           </p>
 
-          <p>
+          <p className="TextLeftAnimate">
             Outside of coding, I love engaging in activities that keep me
             productive and creative:
           </p>
 
-          <ul className="list-disc pl-8 space-y-2">
+          <ul className="TextRightAnimate list-disc pl-8 space-y-2">
             <li>Building Web Projects 💻</li>
             <li>Learning New Technologies 📚</li>
             <li>Exploring Data Analytics & Power BI 📊</li>
           </ul>
 
-          <p className="text-[#9B7EAC] italic">
+          <p className="TextLeftAnimate text-[#9B7EAC] italic">
             "Keep learning, keep building, and never stop improving." – Shivam
           </p>
 
         </div>
 
         {/* RIGHT IMAGE */}
-        <div className="w-full lg:w-1/4 flex justify-center">
+        <div className="animateImage w-full lg:w-1/4 flex justify-center">
           <img
             src={StudyImage}
             alt="Study"
@@ -101,7 +149,7 @@ function About() {
           Professional <span className="text-purple-400">Skillset</span>
         </h1>
 
-        <div className="flex flex-wrap justify-center gap-6 w-11/12 md:w-10/12 mx-auto">
+        <div className="animateSkill flex flex-wrap justify-center gap-6 w-11/12 md:w-10/12 mx-auto">
           {skills.map((skill, index) => (
             <SkillCard key={index} icon={skill.icon} name={skill.name} />
           ))}
