@@ -77,7 +77,7 @@ function Navbar() {
   }, [menuOpen]);
 
   return (
-    <div className="w-full bg-[#181126] overflow-hidden">
+    <div className="w-full bg-[#181126] overflow-hidden ">
 
       <nav
         ref={navRef}
