@@ -1,16 +1,51 @@
-# React + Vite
+# Shivam's Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A responsive, single-page portfolio for introducing Shivam, sharing selected projects, and viewing or downloading a resume. The top navigation scrolls to each section using clean paths such as `/about`, `/projects`, and `/resume`.
 
-Currently, two official plugins are available:
+## Sections
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Home:** introduction and developer profile
+- **About:** background and technology skillset
+- **Projects:** PyroDekho and Snake Game, with repository and demo links
+- **Resume:** embedded PDF preview and download link
+- **Contact:** social links at the bottom of the page
 
-## React Compiler
+Scroll-triggered GSAP animations reveal the introduction, About content, and project cards as they enter view. Project cards alternate their entrance direction.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Built with
 
-## Expanding the ESLint configuration
+- React 19 and Vite
+- React Router
+- Tailwind CSS
+- GSAP and ScrollTrigger
+- React Icons and React Type Animation
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Run locally
+
+Requirements: Node.js and npm.
+
+```bash
+npm install
+npm run dev
+```
+
+Vite prints the local development URL in the terminal.
+
+## Other commands
+
+```bash
+npm run build    # Create a production build in dist/
+npm run preview  # Preview the production build locally
+npm run lint     # Run ESLint
+```
+
+## Project files
+
+```text
+src/
+  components/    Shared navigation, contact, footer, and project cards
+  pages/         Home, About, and Projects content
+  assets/        Images and the resume PDF
+```
+
+To update the portfolio, edit the corresponding page or component under `src/`. Update project details in `src/pages/Projects.jsx`, social profile URLs in the contact/footer components, and replace `src/assets/Resume.pdf` to change the resume.
