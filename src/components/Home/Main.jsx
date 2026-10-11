@@ -1,9 +1,7 @@
-import React from "react";
+import React, { useRef } from "react";
 import { TypeAnimation } from "react-type-animation";
 import developer from "../../assets/DeveloperImage.svg";
-import Footer from "../Footer/footer";
 import Shivam from "../../assets/Shivam.png";
-import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa";
 
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -12,6 +10,7 @@ import { useGSAP } from "@gsap/react";
 gsap.registerPlugin(ScrollTrigger);
 
 function Main() {
+  const mainRef = useRef(null);
 
   useGSAP(() => {
 
@@ -92,13 +91,13 @@ function Main() {
         scrub: 1
       }
     });
-    })
+    }, mainRef.current)
     return () => ctx.revert();
 
   },[]);
 
   return (
-    <div className="bg-[#181126] min-h-screen w-full overflow-x-hidden">
+    <div ref={mainRef} className="bg-[#181126] min-h-screen w-full overflow-x-hidden">
 
       {/* ================= HERO SECTION ================= */}
 
@@ -233,47 +232,6 @@ function Main() {
 
       </div>
 
-
-      {/* ================= CONNECT SECTION ================= */}
-
-      <div className="text-white text-center flex flex-col gap-5 mt-20">
-
-        <h1 className="font-code text-3xl md:text-4xl">
-          Find Me On
-        </h1>
-
-        <h5 className="font-code text-lg md:text-xl">
-          Feel free to <span className="text-[#C770F0]">connect</span> with me
-        </h5>
-
-        <div className="flex gap-8 text-2xl md:text-3xl justify-center mt-4 mb-6">
-
-          <FaGithub
-            className="cursor-pointer hover:text-purple-400 transition"
-            onClick={() =>
-              window.open("https://github.com/26cShivam", "_blank")
-            }
-          />
-
-          <FaLinkedin
-            className="cursor-pointer hover:text-purple-400 transition"
-            onClick={() =>
-              window.open("https://linkedin.com/in/shivam", "_blank")
-            }
-          />
-
-          <FaInstagram
-            className="cursor-pointer hover:text-purple-400 transition"
-            onClick={() =>
-              window.open("https://instagram.com/shivam", "_blank")
-            }
-          />
-
-        </div>
-
-      </div>
-
-      <Footer />
 
     </div>
   );

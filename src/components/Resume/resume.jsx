@@ -1,13 +1,9 @@
 import React from "react";
 import resume from "../../assets/Resume.pdf";
-import Navbar from "../Home/Navbar";
-import Footer from "../Footer/footer";
 
 function Resume() {
   return (
     <>
-      <Navbar />
-
       <div className="flex flex-col items-center gap-10 py-20 min-h-screen bg-[#130F1A]">
         <a
           href={resume}
@@ -33,7 +29,6 @@ function Resume() {
           ⬇ Download CV
         </a>
       </div>
-      <Footer />
     </>
   );
 }

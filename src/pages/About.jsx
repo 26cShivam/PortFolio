@@ -1,7 +1,6 @@
 
-import React from "react";
+import React, { useRef } from "react";
 import StudyImage from "../assets/StudyImage.jpg";
-import Navbar from "../components/Home/Navbar";
 import {
   FaReact,
   FaNodeJs,
@@ -20,11 +19,14 @@ import {
 } from "react-icons/si";
 import { TbBrandRedux } from "react-icons/tb";
 import SkillCard from "../components/About/SkillCard";
-import Footer from "../components/Footer/footer";
 import gsap from 'gsap'
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 
+gsap.registerPlugin(ScrollTrigger);
+
 function About() {
+  const sectionRef = useRef(null);
   const skills = [
     { name: "JavaScript", icon: <SiJavascript className="text-yellow-500" /> },
     { name: "React.js", icon: <FaReact className="text-blue-400" /> },
@@ -42,53 +44,27 @@ function About() {
 
   //Animation Code
 
-  useGSAP(()=>{
-    const tl = gsap.timeline();
-    tl.from('.headingAnimate',{
-      x:200,
-      opacity:0,
-      duration:1,
-
-    })
-
-    tl.from('.TextLeftAnimate',{
-      x:-100,
-      opacity:0,
-      duration:1,
-    })
-    tl.from('.TextRightAnimate',{
-      x:100,
-      opacity:0,
-      duration:1,
-    })
-
-    tl.from(".animateImage", {
-      x: 100,
-      scale: 0,
-      opacity: 0,
-      duration: 0.8,
-      ease: "back.out(1.7)"
+  useGSAP(() => {
+    gsap.utils.toArray(".about-reveal").forEach((element) => {
+      gsap.fromTo(element,
+        { y: 36, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          ease: "none",
+          scrollTrigger: {
+            trigger: element,
+            start: "top 88%",
+            end: "top 58%",
+            scrub: 0.6,
+          },
+        }
+      );
     });
-
-    gsap.from('.animateSkill',{
-      x:-200,
-      duration:1,
-      opacity:0,
-      scrollTrigger:{
-        trigger:'.animateSkill',
-        start: "top 85%",
-        end: "bottom 80%",
-        scrub: 0.6,
-        // markers:true
-
-      }
-    })
-
-  })
+  }, { scope: sectionRef })
 
   return (
-    <div className="bg-[#181126] min-h-screen text-white">
-      <Navbar />
+    <div ref={sectionRef} className="bg-[#181126] min-h-screen text-white">
 
       {/* ABOUT INTRO SECTION */}
       <div className="flex flex-col lg:flex-row w-11/12 mx-auto items-center gap-10 py-16">
@@ -96,43 +72,43 @@ function About() {
         {/* LEFT TEXT */}
         <div className="w-full lg:w-3/4 px-6 md:px-10 font-code flex flex-col gap-6 text-lg md:text-xl leading-8">
 
-          <h1 className="headingAnimate text-2xl md:text-3xl lg:text-4xl text-center">
+          <h1 className="headingAnimate about-reveal text-2xl md:text-3xl lg:text-4xl text-center">
             Know Who <span className="text-[#C770F0]">I'M</span>
           </h1>
 
-          <p className="TextLeftAnimate">
+          <p className="TextLeftAnimate about-reveal">
             Hi everyone! I’m Shivam from India. I’m a passionate Web Developer
             who enjoys building modern and responsive web applications. I focus
             on creating clean UI and scalable full-stack applications using
             modern technologies.
           </p>
 
-          <p className="TextRightAnimate">
+          <p className="TextRightAnimate about-reveal">
             I mainly work with technologies like React.js, Node.js, Express.js,
             MongoDB, JavaScript, and Tailwind CSS. I enjoy building projects,
             exploring new tools, and continuously improving my development
             skills.
           </p>
 
-          <p className="TextLeftAnimate">
+          <p className="TextLeftAnimate about-reveal">
             Outside of coding, I love engaging in activities that keep me
             productive and creative:
           </p>
 
-          <ul className="TextRightAnimate list-disc pl-8 space-y-2">
+          <ul className="TextRightAnimate about-reveal list-disc pl-8 space-y-2">
             <li>Building Web Projects 💻</li>
             <li>Learning New Technologies 📚</li>
             <li>Exploring Data Analytics & Power BI 📊</li>
           </ul>
 
-          <p className="TextLeftAnimate text-[#9B7EAC] italic">
+          <p className="TextLeftAnimate about-reveal text-[#9B7EAC] italic">
             "Keep learning, keep building, and never stop improving." – Shivam
           </p>
 
         </div>
 
         {/* RIGHT IMAGE */}
-        <div className="animateImage w-full lg:w-1/4 flex justify-center">
+        <div className="animateImage about-reveal w-full lg:w-1/4 flex justify-center">
           <img
             src={StudyImage}
             alt="Study"
@@ -145,11 +121,11 @@ function About() {
       {/* SKILLS SECTION */}
       <div className="py-16">
 
-        <h1 className="text-center text-2xl md:text-3xl lg:text-4xl mb-10">
+        <h1 className="about-reveal text-center text-2xl md:text-3xl lg:text-4xl mb-10">
           Professional <span className="text-purple-400">Skillset</span>
         </h1>
 
-        <div className="animateSkill flex flex-wrap justify-center gap-6 w-11/12 md:w-10/12 mx-auto">
+        <div className="animateSkill about-reveal flex flex-wrap justify-center gap-6 w-11/12 md:w-10/12 mx-auto">
           {skills.map((skill, index) => (
             <SkillCard key={index} icon={skill.icon} name={skill.name} />
           ))}
@@ -157,7 +133,6 @@ function About() {
 
       </div>
 
-      <Footer />
     </div>
   );
 }
