@@ -3,6 +3,34 @@ html {
   scroll-behavior: smooth;
 }
 
+html,
+body {
+  max-width: 100%;
+  overflow-x: clip;
+  background-color: #181126;
+}
+
+
 .font-code{
   font-family: "Fira Code", monospace;
+}
+
+:focus-visible {
+  outline: 2px solid #c27aff;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+input:focus-visible,
+textarea:focus-visible {
+  outline-offset: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  * {
+    transition-duration: 0.01ms !important;
+  }
 }

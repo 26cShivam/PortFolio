@@ -1,10 +1,11 @@
-import { useEffect } from 'react'
+import { lazy, Suspense, useEffect } from 'react'
 import { useLocation } from 'react-router'
 import './App.css'
 import Home from './pages/Home'
 import About from './pages/About'
 import Projects from './pages/Projects'
-import Resume from './components/Resume/resume'
+import BackToTop from './components/BackToTop'
+const Resume = lazy(() => import('./components/Resume/resume'))
 import Navbar from './components/Home/Navbar'
 import Footer from './components/Footer/footer'
 import Contact from './components/Footer/Contact'
@@ -34,10 +35,11 @@ function App() {
         <section id="home" className="scroll-mt-24"><Home /></section>
         <section id="about" className="scroll-mt-24"><About /></section>
         <section id="projects" className="scroll-mt-24"><Projects /></section>
-        <section id="resume" className="scroll-mt-24"><Resume /></section>
+        <section id="resume" className="scroll-mt-24 min-h-[50vh]"><Suspense fallback={null}><Resume /></Suspense></section>
       </main>
       <Contact />
       <Footer />
+      <BackToTop />
     </div>
   )
 }

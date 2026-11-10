@@ -1,12 +1,9 @@
-import React from 'react'
 import Main from '../components/Home/Main'
 
-
-function Home(props) {
-  console.log(props)
+function Home() {
   return (
     <div>
-      <Main/>
+      <Main />
     </div>
   )
 }

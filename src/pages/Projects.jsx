@@ -1,10 +1,11 @@
 import React, { useRef } from "react";
 import ProjectCard from "../components/ProjectCard/projects";
-import pyroDekho from "../assets/pyroDekho.png";
-import snake from "../assets/Snake.jpg";
+import pyroDekho from "../assets/pyroDekho.webp";
+import snake from "../assets/Snake.webp";
 import gsap from 'gsap';
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { prefersReducedMotion } from "../utils/motion";
 
 gsap.registerPlugin(ScrollTrigger);
 function Projects() {
@@ -16,6 +17,7 @@ function Projects() {
       title: "PyroDekho",
       description:
         "A full-stack fireworks product showcase platform built using React.js, Node.js, Express.js, and MongoDB, with Cloudinary integration for efficient image storage and management.",
+      tech: ["React", "Node.js", "Express", "MongoDB", "Cloudinary"],
       github: "https://github.com/Pyro-Dekho/PyroDekho",
       demo: "https://pyrodekho.com/",
     },
@@ -24,12 +26,14 @@ function Projects() {
       title: "Snake Game",
       description:
         "A classic Snake game built with React and CSS, featuring smooth animations and responsive design.",
+      tech: ["React", "CSS", "JavaScript"],
       github: "https://github.com/26cShivam/SnakeGame",
       demo: "https://snakegameheree.netlify.app/",
     },
   ];
 
   useGSAP(() => {
+    if (prefersReducedMotion()) return;
     gsap.utils.toArray(".project-reveal").forEach((element) => {
       gsap.fromTo(element,
         { y: 40, opacity: 0 },
@@ -49,7 +53,7 @@ function Projects() {
 
     gsap.utils.toArray(".project-card-reveal").forEach((element, index) => {
       gsap.fromTo(element,
-        { x: index % 2 === 0 ? -100 : 100, opacity: 0 },
+        { x: (window.innerWidth < 768 ? 24 : 100) * (index % 2 === 0 ? -1 : 1), opacity: 0 },
         {
           x: 0,
           opacity: 1,
@@ -66,7 +70,7 @@ function Projects() {
   }, { scope: projectsRef });
 
   return (
-    <div ref={projectsRef} className="bg-[#181126] min-h-screen flex flex-col font-code">
+    <div ref={projectsRef} className="bg-[#181126] min-h-screen flex flex-col font-code overflow-x-clip">
       {" "}
       {/* PROJECTS */}{" "}
       <div className="w-11/12 mx-auto text-center mt-12">

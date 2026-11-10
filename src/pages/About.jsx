@@ -22,6 +22,7 @@ import SkillCard from "../components/About/SkillCard";
 import gsap from 'gsap'
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { prefersReducedMotion } from "../utils/motion";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -45,6 +46,7 @@ function About() {
   //Animation Code
 
   useGSAP(() => {
+    if (prefersReducedMotion()) return;
     gsap.utils.toArray(".about-reveal").forEach((element) => {
       gsap.fromTo(element,
         { y: 36, opacity: 0 },
@@ -64,13 +66,13 @@ function About() {
   }, { scope: sectionRef })
 
   return (
-    <div ref={sectionRef} className="bg-[#181126] min-h-screen text-white">
+    <div ref={sectionRef} className="bg-[#181126] min-h-screen text-white overflow-x-clip">
 
       {/* ABOUT INTRO SECTION */}
       <div className="flex flex-col lg:flex-row w-11/12 mx-auto items-center gap-10 py-16">
 
         {/* LEFT TEXT */}
-        <div className="w-full lg:w-3/4 px-6 md:px-10 font-code flex flex-col gap-6 text-lg md:text-xl leading-8">
+        <div className="w-full lg:w-3/4 px-2 sm:px-6 md:px-10 font-code flex flex-col gap-6 text-base md:text-xl leading-7 md:leading-8">
 
           <h1 className="headingAnimate about-reveal text-2xl md:text-3xl lg:text-4xl text-center">
             Know Who <span className="text-[#C770F0]">I'M</span>
@@ -112,6 +114,7 @@ function About() {
           <img
             src={StudyImage}
             alt="Study"
+            loading="lazy"
             className="w-64 md:w-72 lg:w-80 rounded-lg shadow-lg hover:rotate-6 transition-transform duration-500"
           />
         </div>

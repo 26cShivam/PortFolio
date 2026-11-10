@@ -1,11 +1,13 @@
 import React, { useRef } from "react";
 import { TypeAnimation } from "react-type-animation";
 import developer from "../../assets/DeveloperImage.svg";
-import Shivam from "../../assets/Shivam.png";
+import Shivam from "../../assets/Shivam.webp";
 
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { prefersReducedMotion } from "../../utils/motion";
+import { site } from "../../data/site";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -13,8 +15,11 @@ function Main() {
   const mainRef = useRef(null);
 
   useGSAP(() => {
+    if (prefersReducedMotion()) return;
 
 
+    const isMobile = window.innerWidth < 768;
+    const dx = isMobile ? 24 : 100;
     const ctx = gsap.context(()=>{
           const tl = gsap.timeline();
 
@@ -26,7 +31,7 @@ function Main() {
     })
 
     tl.from(".animateImage", {
-      x: 100,
+      x: dx,
       scale: 0,
       opacity: 0,
       duration: 0.8,
@@ -34,7 +39,7 @@ function Main() {
     });
 
     gsap.from(".introHeading", {
-      x: 80,
+      x: isMobile ? 20 : 80,
       opacity: 0,
 
       scrollTrigger: {
@@ -50,7 +55,7 @@ function Main() {
     /* ================= INTRO TEXT ================= */
 
     gsap.from(".introText .introTextLeft", {
-      x: -100,
+      x: -dx,
       opacity: 0,
       stagger: 0.3,
 
@@ -64,7 +69,7 @@ function Main() {
     });
 
     gsap.from(".introText .introTextRight", {
-      x: 100,
+      x: dx,
       opacity: 0,
       stagger: 0.3,
 
@@ -97,7 +102,7 @@ function Main() {
   },[]);
 
   return (
-    <div ref={mainRef} className="bg-[#181126] min-h-screen w-full overflow-x-hidden">
+    <div ref={mainRef} className="bg-[#181126] min-h-screen w-full overflow-x-clip">
 
       {/* ================= HERO SECTION ================= */}
 
@@ -105,7 +110,7 @@ function Main() {
 
         {/* LEFT SIDE */}
 
-        <div className="animateSkill w-full lg:w-3/4 flex flex-col gap-8 px-6 py-16 md:px-16 md:py-24 lg:px-40 lg:py-40">
+        <div className="animateSkill w-full lg:w-3/4 flex flex-col gap-8 px-4 py-12 sm:px-8 md:px-16 md:py-24 lg:px-40 lg:py-40">
 
           <h1 className="text-white text-2xl md:text-4xl lg:text-5xl">
             Hi There !
@@ -137,6 +142,19 @@ function Main() {
 
           </div>
 
+          <p className="font-code text-gray-300 text-base md:text-lg max-w-xl">
+            I build fast, responsive full-stack web apps with the MERN stack.
+          </p>
+
+          <div className="flex flex-wrap gap-4 font-code">
+            <a href="#projects" className="rounded-lg bg-purple-600 px-6 py-3 text-white transition hover:bg-purple-700">
+              View Projects
+            </a>
+            <a href={site.resume} download="Shivam_Resume.pdf" className="rounded-lg border border-purple-500 px-6 py-3 text-white transition hover:bg-purple-600">
+              Download CV
+            </a>
+          </div>
+
         </div>
 
         {/* RIGHT SIDE IMAGE */}
@@ -146,7 +164,7 @@ function Main() {
           <img
             src={developer}
             alt="Developer"
-            className="w-60 md:w-72 lg:w-80 transition-transform duration-500 hover:scale-110"
+            className="w-48 sm:w-60 md:w-72 lg:w-80 transition-transform duration-500 hover:scale-110"
           />
 
         </div>
@@ -158,7 +176,7 @@ function Main() {
 
       <div className="w-11/12 mx-auto introSection">
 
-        <h1 className="introHeading text-white font-extrabold text-3xl md:text-4xl lg:text-5xl px-4 md:px-10 lg:px-40 py-8 font-code">
+        <h1 className="introHeading text-white font-extrabold text-2xl sm:text-3xl md:text-4xl lg:text-5xl break-words px-4 md:px-10 lg:px-40 py-8 font-code">
 
           LET ME <span className="text-[#C27AFF]">INTRODUCE</span> MYSELF
 
@@ -169,7 +187,7 @@ function Main() {
 
           {/* TEXT */}
 
-          <div className="w-full lg:w-2/3 px-4 lg:px-16 text-white text-lg md:text-xl leading-8 font-code">
+          <div className="w-full lg:w-2/3 px-4 lg:px-16 text-white text-base md:text-xl leading-7 md:leading-8 font-code">
 
             <ul className="flex flex-col gap-6 introText">
 
@@ -223,7 +241,7 @@ function Main() {
             <img
               src={Shivam}
               alt="Shivam Image"
-              className=" w-52 rounded-3xl md:w-64 lg:w-72 transition-transform duration-500 hover:scale-110"
+              className="w-44 sm:w-52 rounded-3xl md:w-64 lg:w-72 transition-transform duration-500 hover:scale-110"
             />
 
           </div>
